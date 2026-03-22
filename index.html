@@ -6,25 +6,38 @@
 </head>
 
 <body>
-  <a-scene
-    mindar-image="imageTargetSrc: targets.mind;"
-    color-space="sRGB"
-    renderer="colorManagement: true, physicallyCorrectLights"
-    vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: true"
-  >
 
-    <a-assets timeout="20000">
-      <img id="photo" src="photo.jpg">
-    </a-assets>
+<!-- スタートボタン -->
+<button id="startButton" style="font-size:20px; padding:10px;">
+  ARを開始する
+</button>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+<a-scene
+  mindar-image="imageTargetSrc: targets.mind; autoStart: false;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: true"
+>
 
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-image src="#photo" position="0 0 0" height="1" width="1"></a-image>
-      <a-text value="ありがとう！" position="0 1 0" align="center"></a-text>
-    </a-entity>
+  <a-assets timeout="10000">
+    <img id="photo" src="photo.jpg">
+  </a-assets>
 
-  </a-scene>
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+  <a-entity mindar-image-target="targetIndex: 0">
+    <a-image src="#photo" position="0 0 0" height="1" width="1"></a-image>
+    <a-text value="ありがとう！" position="0 1 0" align="center"></a-text>
+  </a-entity>
+
+</a-scene>
+
+<script>
+document.querySelector("#startButton").addEventListener("click", async () => {
+  const sceneEl = document.querySelector("a-scene");
+  await sceneEl.systems["mindar-image-system"].start();
+  document.querySelector("#startButton").style.display = "none";
+});
+</script>
+
 </body>
 </html>
