@@ -8,11 +8,21 @@
 <body>
 
 <!-- スタートボタン -->
-<button id="startButton" style="font-size:20px; padding:10px;">
+<button id="startButton"
+  style="
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    font-size:20px;
+    padding:10px;
+  ">
   ARを開始する
 </button>
 
 <a-scene
+  id="scene"
+  style="display:none;"
   mindar-image="imageTargetSrc: targets.mind; autoStart: false;"
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: true"
@@ -33,8 +43,11 @@
 
 <script>
 document.querySelector("#startButton").addEventListener("click", async () => {
-  const sceneEl = document.querySelector("a-scene");
-  await sceneEl.systems["mindar-image-system"].start();
+  const scene = document.querySelector("#scene");
+
+  scene.style.display = "block"; // 表示
+  await scene.systems["mindar-image-system"].start();
+
   document.querySelector("#startButton").style.display = "none";
 });
 </script>
