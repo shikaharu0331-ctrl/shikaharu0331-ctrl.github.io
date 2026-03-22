@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- ① A-Frameを先に -->
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-
-  <!-- ② そのあとMindAR -->
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image.prod.js"></script>
 </head>
 
 <body>
-  <a-scene mindar-image="imageTargetSrc: targets.mind;" 
-           vr-mode-ui="enabled: false" 
-           device-orientation-permission-ui="enabled: false">
+  <a-scene
+    mindar-image="imageTargetSrc: targets.mind;"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: true"
+  >
 
     <a-assets timeout="10000">
       <img id="photo" src="photo.jpg">
