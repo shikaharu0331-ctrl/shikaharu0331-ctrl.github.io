@@ -45,7 +45,17 @@
 document.querySelector("#startButton").addEventListener("click", async () => {
   const scene = document.querySelector("#scene");
 
-  scene.style.display = "block"; // 表示
+  // iPhone用：カメラ許可を明示的に要求
+  try {
+    await navigator.mediaDevices.getUserMedia({ video: true });
+  } catch (e) {
+    alert("カメラの許可が必要です");
+    return;
+  }
+
+  scene.style.display = "block";
+
+  // AR開始
   await scene.systems["mindar-image-system"].start();
 
   document.querySelector("#startButton").style.display = "none";
